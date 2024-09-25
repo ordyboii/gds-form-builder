@@ -1,15 +1,41 @@
 <script setup lang="ts">
+import { readMe } from "@directus/sdk";
+
 const { $directus, $readItems } = useNuxtApp();
 
-const { data: test } = await useAsyncData("test", async () => {
-  return $directus.request($readItems("test"));
+const login = await useAsyncData(
+  "login",
+  () => $directus.login("jake.ord543@gmail.com", "Grassmaneditor@1"),
+  {
+    immediate: false,
+  }
+);
+
+const boards = await useAsyncData(
+  "boards",
+  async () => {
+    return $directus.request($readItems("Boards"));
+  },
+  {
+    immediate: false,
+  }
+);
+
+const me = await useAsyncData("me", () => $directus.request(readMe()), {
+  immediate: false,
 });
 </script>
 
 <template>
   <NuxtRouteAnnouncer />
   <h1>hello2</h1>
-  <ul v-for="tes in test">
-    <li>{{ tes.title }}</li>
-  </ul>
+  <button @click="() => login.execute()">Login</button>
+  <pre>{{ login.data }}</pre>
+  <pre>{{ login.error }}</pre>
+  <button @click="() => boards.execute()">Get boards</button>
+  <pre>{{ boards.data }}</pre>
+  <pre>{{ boards.error }}</pre>
+  <button @click="() => me.execute()">Get me</button>
+  <pre>{{ me.data }}</pre>
+  <pre>{{ me.error }}</pre>
 </template>
