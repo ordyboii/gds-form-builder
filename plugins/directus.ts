@@ -9,8 +9,7 @@ import {
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
-  const directus = createDirectus()
-  // Fix to use environment variable
+  const directus = createDirectus(config.public.directusApi)
     .with(authentication("cookie", { credentials: "include" }))
     .with(rest({ credentials: "include" }))
     .with(realtime());
