@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { readMe } from "@directus/sdk";
-
-const { $directus, $readItems } = useNuxtApp();
+const { $directus, $readItems, $readMe } = useNuxtApp();
 
 const login = await useAsyncData(
   "login",
@@ -21,7 +19,7 @@ const boards = await useAsyncData(
   }
 );
 
-const me = await useAsyncData("me", () => $directus.request(readMe()), {
+const me = await useAsyncData("me", () => $directus.request($readMe()), {
   immediate: false,
 });
 </script>
