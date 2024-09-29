@@ -6,6 +6,7 @@ import {
   readItem,
   readItems,
   readMe,
+  createItem,
 } from "@directus/sdk";
 
 export default defineNuxtPlugin(() => {
@@ -16,6 +17,6 @@ export default defineNuxtPlugin(() => {
     .with(realtime());
 
   return {
-    provide: { directus, readItem, readItems, readMe },
+    provide: { directus, readItem, readItems, readMe, createItem },
   };
 });
