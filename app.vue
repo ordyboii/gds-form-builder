@@ -1,7 +1,7 @@
 <script setup>
 const { $directus, $readItems, $createItem } = useNuxtApp();
 
-const boards = await useAsyncData("boards", async () => {
+const boards = await useAsyncData("boards", () => {
   return $directus.request($readItems("Boards"));
 });
 
