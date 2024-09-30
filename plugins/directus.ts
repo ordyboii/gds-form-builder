@@ -12,8 +12,8 @@ import {
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
   const directus = createDirectus(config.public.directusApi)
-    .with(authentication("session", { credentials: "include" }))
-    .with(rest({ credentials: "include" }))
+    .with(authentication("session"))
+    .with(rest())
     .with(realtime());
 
   return {
